@@ -1,43 +1,28 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Item } from '../types';
-import { Items } from '../item-data';
-
-interface Detail {
-  name: string;
-}
 
 @Component({
   selector: 'app-item-detail-selector',
   templateUrl: './item-detail-selector.component.html',
-  styleUrl: './item-detail-selector.component.css'
+  styleUrls: ['./item-detail-selector.component.css'] // Ensure this is corrected
 })
 export class ItemDetailSelectorComponent {
-  dropdownOpen = false;
   dropdownOpenId: string | null = null;
-  selectedDetail: Detail | null = null;
-  details: Detail[] = [
-    { name: 'Test1'},
-    { name: 'Test2'},
-    { name: 'Test3'}
-  ]
+  // Use an object to map dropdown IDs to their selected values
+  selectedDetails: { [customOptionId: string]: string } = {};
   @Input() item: Item;
-  @Output() close = new EventEmitter<void>();
 
   toggleDropdown(customOptionId: string): void {
-    if (this.dropdownOpenId === customOptionId) {
-      this.dropdownOpenId = null; // If it's already open, close it
-    } else {
-      this.dropdownOpenId = customOptionId; // Else, open the clicked dropdown
-    }
+    this.dropdownOpenId = this.dropdownOpenId === customOptionId ? null : customOptionId;
   }
 
   isDropdownOpen(customOptionId: string): boolean {
     return this.dropdownOpenId === customOptionId;
   }
-  selectDetail(item: Item): void {
-    this.selectedDetail = item;
-    this.dropdownOpen = false;
+
+  // Ensure customOptionId is part of the method parameters
+  selectDetail(customOptionId: string, selectedDetail: string): void {
+    this.selectedDetails[customOptionId] = selectedDetail;
+    this.dropdownOpenId = null;
   }
 }
-
-
