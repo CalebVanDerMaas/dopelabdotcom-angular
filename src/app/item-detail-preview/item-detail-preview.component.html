@@ -1,0 +1,13 @@
+<!-- <div class="relative overflow-hidden" [style.height.px]="containerHeight"  [style.marginTop.px]="topMargin"></div> -->
+<!-- <img [style.height.px]="imageHeight" class="absolute top-0 left-0 w-full h-auto" src="assets/teeShirt.svg"> -->
+    <!-- <img [style.height.px]="imageHeight" class="absolute top-0 left-0 w-full h-auto" src="assets/clock.svg"> -->
+
+<div class="relative overflow-hidden" [style.height.px]="containerHeight" [style.marginLeft.px]="leftMargin" [style.marginRight.px]="rightMargin" [style.marginBottom.px]="bottomMargin"  [style.marginTop.px]="topMargin">
+    <div #garment class="absolute top-0 left-0 w-full h-auto z-20" [innerHTML]="vinylSVG | safeHtml"></div>
+    <div class="absolute top-0 left-0 w-full h-auto z-10" [innerHTML]="garmentSVG | safeHtml"></div>
+</div>
+
+    
+    
+    
+    

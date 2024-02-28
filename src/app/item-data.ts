@@ -8,96 +8,74 @@ export const Items: Item[] = [{
     name:'Classic Tee Shirt',
     custom_options: [
         {
-            name: 'Size',
-            options: ['Small', 'Medium', 'Large', 'X_Large']
+            type: 'Size',
+            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}]
         },
         {
-            name: 'Shirt Color',
-            options: ['Black', 'White', 'Light Grey', 'Dark Grey', 'Red', 'Blue', 'Light Blue', 'Navy', 'Green', 'Purple', 'Yellow', 'Orange', 'Pink']
+            type: 'Shirt Color',
+            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}]
         },
         {
-            name:'Vinyl Design',
-            options:['4Q Logo', 'Forth Quarter Sports Full Front Logo', 'Clock Logo (+$3)[+3]', 'Bars Logo', '4 Fingers Logo'],
+            type:'Vinyl Design',
+            options:[{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}],
         },
         {
-            name:'Vinyl Color',
-            options:['White', 'Black', 'Red', 'Blue', 'Gold']
+            type:'Vinyl Color',
+            options:[{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}]
         }
     ],
-    url: 'https://dopelab.com'
+    url: 'https://dopelab.com',
+    proportion: [{bottomMargin: 0.20707596, rightMargin: 0.07358739, leftMargin: 0.06701708, topMargin: 0.16129032}]
 }, {
-    id:'sweatshirt',
-    price:'20.00',
-    description:'8 oz. 50% preshunk cotton, 50% polyester classic fit hoodie.',
-    image:'/assets/items/GreySweatshirt.svg', 
-    name:'Classic Sweatshirt',
+    id:'shirt',
+    price:'13.00',
+    description:'5.5 oz. 50% preshunk cotton, 50% polyester classic fit tee.',
+    image:'/assets/items/GreyShirt.svg', 
+    name:'Classic Tee Shirt',
     custom_options: [
         {
-            name:'Sweatshirt Size',
-            options:['Small', 'Medium', 'Large', 'X_Large']
+            type: 'Size',
+            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}]
         },
         {
-            name:'Sweatshirt Color',
-            options:['Black', 'White', 'Light Grey', 'Dark Grey', 'Red', 'Blue', 'Light Blue', 'Navy', 'Green', 'Purple', 'Yellow', 'Orange', 'Pink']
+            type: 'Shirt Color',
+            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}]
         },
         {
-            name:'Vinyl Design',
-            options:['4Q Logo', 'Forth Quarter Sports Full Front Logo', 'Clock Logo (+$3)[+3]', 'Bars Logo', '4 Fingers Logo']
+            type:'Vinyl Design',
+            options:[{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}],
         },
         {
-            name:'Vinyl Color',
-            options:['White', 'Black', 'Red', 'Blue', 'Gold']
+            type:'Vinyl Color',
+            options:[{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}]
         }
     ],
-    url: 'https://dopelab.com'
+    url: 'https://dopelab.com',
+    proportion: [{bottomMargin: 0.20707596, rightMargin: 0.07358739, leftMargin: 0.06701708, topMargin: 0.16129032}]
 }, {
-    id:'sweatshirt',
-    price:'20.00',
-    description:'8 oz. 50% preshunk cotton, 50% polyester classic fit hoodie.',
-    image:'/assets/items/GreySweatshirt.svg', 
-    name:'Classic Sweatshirt',
+    id:'shirt',
+    price:'13.00',
+    description:'5.5 oz. 50% preshunk cotton, 50% polyester classic fit tee.',
+    image:'/assets/items/GreyShirt.svg', 
+    name:'Classic Tee Shirt',
     custom_options: [
         {
-            name:'Sweatshirt Size',
-            options:['Small', 'Medium', 'Large', 'X_Large']
+            type: 'Size',
+            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}]
         },
         {
-            name:'Sweatshirt Color',
-            options:['Black', 'White', 'Light Grey', 'Dark Grey', 'Red', 'Blue', 'Light Blue', 'Navy', 'Green', 'Purple', 'Yellow', 'Orange', 'Pink']
+            type: 'Shirt Color',
+            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}]
         },
         {
-            name:'Vinyl Design',
-            options:['4Q Logo', 'Forth Quarter Sports Full Front Logo', 'Clock Logo (+$3)[+3]', 'Bars Logo', '4 Fingers Logo']
+            type:'Vinyl Design',
+            options:[{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}],
         },
         {
-            name:'Vinyl Color',
-            options:['White', 'Black', 'Red', 'Blue', 'Gold']
+            type:'Vinyl Color',
+            options:[{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#000000"}]
         }
     ],
-    url: 'https://dopelab.com'
-}, {
-    id:'sweatshirt',
-    price:'20.00',
-    description:'8 oz. 50% preshunk cotton, 50% polyester classic fit hoodie.',
-    image:'/assets/items/GreySweatshirt.svg', 
-    name:'Classic Sweatshirt',
-    custom_options: [
-        {
-            name:'Sweatshirt Size',
-            options:['Small', 'Medium', 'Large', 'X_Large']
-        },
-        {
-            name:'Sweatshirt Color',
-            options:['Black', 'White', 'Light Grey', 'Dark Grey', 'Red', 'Blue', 'Light Blue', 'Navy', 'Green', 'Purple', 'Yellow', 'Orange', 'Pink']
-        },
-        {
-            name:'Vinyl Design',
-            options:['4Q Logo', 'Forth Quarter Sports Full Front Logo', 'Clock Logo (+$3)[+3]', 'Bars Logo', '4 Fingers Logo']
-        },
-        {
-            name:'Vinyl Color',
-            options:['White', 'Black', 'Red', 'Blue', 'Gold']
-        }
-    ],
-    url: 'https://dopelab.com'
-}]
+    url: 'https://dopelab.com',
+    proportion: [{bottomMargin: 0.20707596, rightMargin: 0.07358739, leftMargin: 0.06701708, topMargin: 0.16129032}]
+},]
