@@ -91,6 +91,11 @@ export class ItemDetailPreviewComponent {
     console.log('Stroke: ' + this.currentStroke)
   }
 
+  updateVinylColor(newColor: string){
+    this.vinylSVG = this.vinylSVG.replace(`fill: ${this.currentFill}`, `fill: $newColor`);
+    this.currentFill = newColor;
+  }
+
   calculateDimensions(): void {
     // const rect = this.garment.nativeElement.getBoundingClientRect();
     // this.width = rect.width;

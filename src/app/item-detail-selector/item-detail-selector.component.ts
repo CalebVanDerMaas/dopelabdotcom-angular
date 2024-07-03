@@ -34,10 +34,18 @@ export class ItemDetailSelectorComponent {
     this.itemDetailPreviewComponent.updateStrokeColor(color.meta2);
   }
 
+  updateVinyl(color: Option){
+    this.itemDetailPreviewComponent.updateVinylColor(color.meta1);
+  }
+
+//FIXME: Vinyl Color not updating
+
   handleClick(optionID: string, selectedDetail: string, option: Option, optionType: string){
     this.selectDetail(optionID, selectedDetail);
     if (optionType === 'Shirt Color')
       this.updateColor(option);
+    if (optionType === 'Vinyl Color')
+      this.updateVinyl(option);
   }
 
   ngAfterViewInit() {
