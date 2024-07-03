@@ -7,7 +7,9 @@ import { AfterViewChecked } from '@angular/core';
 @Component({
   selector: 'app-item-detail-preview',
   templateUrl: './item-detail-preview.component.html',
-  styleUrl: './item-detail-preview.component.css'
+  styleUrl: './item-detail-preview.component.css',
+  // encapsulation: ViewEncapsulation.None
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItemDetailPreviewComponent {
   vinylSVG: string = exampleSvg;
@@ -32,14 +34,18 @@ export class ItemDetailPreviewComponent {
     this.calculateDimensions();
   }
 
+  private resizeObserver: ResizeObserver;
+
   ngAfterViewInit() {
-    this.width = this.garment.nativeElement.offsetWidth;
-    this.height = this.garment.nativeElement.offsetHeight;
-    console.log('Width: ' + this.width)
-    console.log('Height: ' + this.height)
-    this.calculateDimensions();
-    this.cdr.detectChanges();
+    requestAnimationFrame(() => {
+      // Use another requestAnimationFrame to ensure the browser has had time to render
+      requestAnimationFrame(() => {
+        this.calculateDimensions();
+        this.cdr.detectChanges();
+      });
+    });
   }
+  
 
   ngAfterViewChecked(){
     this.width = this.garment.nativeElement.offsetWidth;
@@ -62,12 +68,12 @@ export class ItemDetailPreviewComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event, element: string){
     
-    this.width = this.garment.nativeElement.offsetWidth;
-    this.height = this.garment.nativeElement.offsetHeight;
+    // this.width = this.garment.nativeElement.offsetWidth;
+    // this.height = this.garment.nativeElement.offsetHeight;
 
-    console.log('Width: ' + this.width)
-    console.log('Height: ' + this.height)
-    this.calculateDimensions();
+    
+    // this.calculateDimensions();
+
   }
 
 
@@ -86,6 +92,9 @@ export class ItemDetailPreviewComponent {
   }
 
   calculateDimensions(): void {
+    // const rect = this.garment.nativeElement.getBoundingClientRect();
+    // this.width = rect.width;
+    // this.height = rect.height;
     this.bottomMargin = this.height * 0.20707596 * -1;
     this.topMargin = this.height * 0.16129032 * -1;
     this.containerHeight = this.height ;
@@ -96,5 +105,4 @@ export class ItemDetailPreviewComponent {
   @ViewChild('garment')
   garment: ElementRef;
 }
-
 
