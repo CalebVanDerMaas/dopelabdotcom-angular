@@ -8,10 +8,11 @@ import { ItemDetailPreviewComponent } from '../item-detail-preview/item-detail-p
 })
 export class ItemDetailSelectorComponent {
   dropdownOpenId: string | null = null;
+  @Input() item: Item;
   @ViewChild(ItemDetailPreviewComponent) itemDetailPreviewComponent!: ItemDetailPreviewComponent;
   // Use an object to map dropdown IDs to their selected values
   selectedDetails: { [customOptionId: string]: string } = {};
-  @Input() item: Item;
+  
 
   toggleDropdown(customOptionId: string): void {
     this.dropdownOpenId = this.dropdownOpenId === customOptionId ? null : customOptionId;
@@ -29,26 +30,38 @@ export class ItemDetailSelectorComponent {
     console.log(selectedDetail)
   }
 
-  updateColor(color: Option){
+  updateGarmentColor(color: Option){
     this.itemDetailPreviewComponent.updateFillColor(color.meta1);
     this.itemDetailPreviewComponent.updateStrokeColor(color.meta2);
   }
 
-  updateVinyl(color: Option){
-    this.itemDetailPreviewComponent.updateVinylColor(color.meta1);
+  updateVinylColor(newColor: Option){
+    this.itemDetailPreviewComponent.updateVinylColor(newColor.meta1);
   }
 
-//FIXME: Vinyl Color not updating
+  updateVinylDesign(design: Option){
+    this.itemDetailPreviewComponent.updateVinylSymbol(design.meta1);
+  }
 
   handleClick(optionID: string, selectedDetail: string, option: Option, optionType: string){
     this.selectDetail(optionID, selectedDetail);
-    if (optionType === 'Shirt Color')
-      this.updateColor(option);
-    if (optionType === 'Vinyl Color')
-      this.updateVinyl(option);
+    if (optionType === 'garment_color')
+      this.updateGarmentColor(option);
+    if (optionType === 'vinyl_color')
+      this.updateVinylColor(option);
+    if (optionType == 'vinyl_design')
+      this.updateVinylDesign(option);
+  }
+
+  ngOnInit() {
+    if (this.itemDetailPreviewComponent && this.item){
+      this.itemDetailPreviewComponent.updateGarmentType(this.item.id);
+    }
   }
 
   ngAfterViewInit() {
-    
+    if (this.item){
+      this.itemDetailPreviewComponent.updateGarmentType(this.item.id);
+    }
   }
 }

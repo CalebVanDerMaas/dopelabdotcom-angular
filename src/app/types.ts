@@ -6,7 +6,8 @@ export interface Option {
 }
 
 export interface CustomOptions {
-    type: string;
+    name: string;
+    id: string;
     options: Option[];
 }
 

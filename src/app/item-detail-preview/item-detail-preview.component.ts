@@ -1,8 +1,23 @@
-import { Component, HostListener, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
-import { exampleSvg } from '../../assets/typescripts/4Q';
+import { Component, HostListener, AfterViewInit, ViewChild, ElementRef, Input} from '@angular/core';
+import { forthQuarterSvg } from '../../assets/typescripts/4Q';
+import { clock } from '../../assets/typescripts/clock';
 import { teeShirt } from '../../assets/typescripts/teeShirt';
+import { jogger } from '../../assets/typescripts/jogger';
 import { ChangeDetectorRef } from '@angular/core';
 import { AfterViewChecked } from '@angular/core';
+import { Item } from '../types';
+
+const vinylDesigns: { [key: string]: string} = {
+  '4QS': forthQuarterSvg,
+  'clock': clock,
+  'teeShirt': teeShirt,
+  'jogger': jogger
+}
+
+const garmentMap: { [key: string]: string} = {
+  'shirt': teeShirt,
+  'jogger': jogger,
+}
 
 @Component({
   selector: 'app-item-detail-preview',
@@ -12,7 +27,8 @@ import { AfterViewChecked } from '@angular/core';
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItemDetailPreviewComponent {
-  vinylSVG: string = exampleSvg;
+  @Input() item: Item;
+  vinylSVG: string = forthQuarterSvg;
   garmentSVG: string = teeShirt;
   public containerHeight: number;
   public imageHeight: number;
@@ -26,6 +42,8 @@ export class ItemDetailPreviewComponent {
   public leftMargin: number;
   public currentFill: string = '#7B8482';
   public currentStroke: string = '#03110E';
+  public currentVinylFill: string = '#A0F9E8';
+  public backFill: string;
   
 
   public element = document.getElementById("HTML element");
@@ -62,7 +80,7 @@ export class ItemDetailPreviewComponent {
 
   ngOnInit(): void {
     this.calculateDimensions();
-
+    console.log('ngOnInit - item:', this.item)
   }
 
   @HostListener('window:resize', ['$event'])
@@ -75,7 +93,6 @@ export class ItemDetailPreviewComponent {
     // this.calculateDimensions();
 
   }
-
 
 
   updateFillColor(newColor: string){
@@ -92,19 +109,47 @@ export class ItemDetailPreviewComponent {
   }
 
   updateVinylColor(newColor: string){
-    this.vinylSVG = this.vinylSVG.replace(`fill: ${this.currentFill}`, `fill: $newColor`);
-    this.currentFill = newColor;
+    this.vinylSVG = this.vinylSVG.replace(`fill: ${this.currentVinylFill}`, `fill: ${newColor}`);
+    this.currentVinylFill = newColor;
+  }
+
+  updateVinylSymbol(vinylKey: string ){
+    if (vinylKey in vinylDesigns){
+      this.vinylSVG = vinylDesigns[vinylKey];
+    } else {
+      console.warn('Unknown vinyl design: ', vinylKey);
+    }
+    this.backFill = this.currentVinylFill;
+    this.currentVinylFill = '#A0F9E8';
+    this.updateVinylColor(this.backFill);
+    this.cdr.detectChanges();
+  }
+
+  updateGarmentType(itemId: string){
+    if (itemId in garmentMap){
+      this.garmentSVG = garmentMap[itemId];
+    } else {
+      console.warn('Unknown item ID:', itemId);
+    }
+    this.cdr.detectChanges();
   }
 
   calculateDimensions(): void {
-    // const rect = this.garment.nativeElement.getBoundingClientRect();
-    // this.width = rect.width;
-    // this.height = rect.height;
-    this.bottomMargin = this.height * 0.20707596 * -1;
-    this.topMargin = this.height * 0.16129032 * -1;
-    this.containerHeight = this.height ;
-    this.rightMargin = this.width * 0.07358739 * -1;
-    this.leftMargin = this.width * 0.06701708 * -1;
+    if (this.item && this.item.proportion && this.item.proportion.length > 0) {
+      const proportion = this.item.proportion[0];
+      this.bottomMargin = this.height * proportion.bottomMargin * -1;
+      this.topMargin = this.height * proportion.topMargin * -1;
+      this.containerHeight = this.height;
+      this.rightMargin = this.width * proportion.rightMargin * -1;
+      this.leftMargin = this.width * proportion.leftMargin * -1;
+    } else {
+      // Fallback to default values if proportion is not available
+      // this.bottomMargin = this.height * 0.20707596 * -1;
+      // this.topMargin = this.height * 0.16129032 * -1;
+      // this.containerHeight = this.height;
+      // this.rightMargin = this.width * 0.07358739 * -1;
+      // this.leftMargin = this.width * 0.06701708 * -1;
+    }
   }
 
   @ViewChild('garment')
