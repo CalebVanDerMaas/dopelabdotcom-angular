@@ -1,8 +1,11 @@
 import { Component, HostListener, AfterViewInit, ViewChild, ElementRef, Input} from '@angular/core';
 import { forthQuarterSvg } from '../../assets/typescripts/4Q';
 import { clock } from '../../assets/typescripts/clock';
+import { bars } from '../../assets/typescripts/bars';
 import { teeShirt } from '../../assets/typescripts/teeShirt';
 import { jogger } from '../../assets/typescripts/jogger';
+import { hoodie } from '../../assets/typescripts/hoodie';
+import { sweatshirt } from '../../assets/typescripts/sweatshirt';
 import { ChangeDetectorRef } from '@angular/core';
 import { AfterViewChecked } from '@angular/core';
 import { Item } from '../types';
@@ -10,13 +13,14 @@ import { Item } from '../types';
 const vinylDesigns: { [key: string]: string} = {
   '4QS': forthQuarterSvg,
   'clock': clock,
-  'teeShirt': teeShirt,
-  'jogger': jogger
+  'bars': bars,
 }
 
 const garmentMap: { [key: string]: string} = {
   'shirt': teeShirt,
   'jogger': jogger,
+  'hoodie': hoodie,
+  'sweatshirt': sweatshirt
 }
 
 @Component({
@@ -85,12 +89,6 @@ export class ItemDetailPreviewComponent {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event, element: string){
-    
-    // this.width = this.garment.nativeElement.offsetWidth;
-    // this.height = this.garment.nativeElement.offsetHeight;
-
-    
-    // this.calculateDimensions();
 
   }
 
@@ -144,11 +142,11 @@ export class ItemDetailPreviewComponent {
       this.leftMargin = this.width * proportion.leftMargin * -1;
     } else {
       // Fallback to default values if proportion is not available
-      // this.bottomMargin = this.height * 0.20707596 * -1;
-      // this.topMargin = this.height * 0.16129032 * -1;
-      // this.containerHeight = this.height;
-      // this.rightMargin = this.width * 0.07358739 * -1;
-      // this.leftMargin = this.width * 0.06701708 * -1;
+      this.bottomMargin = this.height * 0.20707596 * -1;
+      this.topMargin = this.height * 0.16129032 * -1;
+      this.containerHeight = this.height;
+      this.rightMargin = this.width * 0.07358739 * -1;
+      this.leftMargin = this.width * 0.06701708 * -1;
     }
   }
 
