@@ -15,7 +15,7 @@ export const Items: Item[] = [{
         {
             name: 'Shirt Color',
             id: 'garment_color',
-            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#f4f7f9"}, {name:'Red', meta1:"#ff0000", meta2:"#000000"}, {name:'Blue', meta1:"#0033d6", meta2:"#000000"}, {name:'Yellow', meta1:"#ede20f", meta2:"#000000"}, {name:'Green', meta1:"#3bed0f", meta2:"#000000"}, {name:'Purple', meta1:"#850fed", meta2:"#000000"}]
+            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#f4f7f9", meta2:"#000000"}, {name:'Red', meta1:"#ff0000", meta2:"#000000"}, {name:'Blue', meta1:"#0033d6", meta2:"#000000"}, {name:'Yellow', meta1:"#ede20f", meta2:"#000000"}, {name:'Green', meta1:"#3bed0f", meta2:"#000000"}, {name:'Purple', meta1:"#850fed", meta2:"#000000"}]
         },
         {
             name:'Vinyl Design',
@@ -45,7 +45,7 @@ export const Items: Item[] = [{
         {
             name: 'Jogger Color',
             id: 'garment_color',
-            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#f4f7f9"}, {name:'Red', meta1:"#ff0000", meta2:"#000000"}, {name:'Blue', meta1:"#0033d6", meta2:"#000000"}, {name:'Yellow', meta1:"#ede20f", meta2:"#000000"}, {name:'Green', meta1:"#3bed0f", meta2:"#000000"}, {name:'Purple', meta1:"#850fed", meta2:"#000000"}]
+            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#f4f7f9", meta2:"#000000"}, {name:'Red', meta1:"#ff0000", meta2:"#000000"}, {name:'Blue', meta1:"#0033d6", meta2:"#000000"}, {name:'Yellow', meta1:"#ede20f", meta2:"#000000"}, {name:'Green', meta1:"#3bed0f", meta2:"#000000"}, {name:'Purple', meta1:"#850fed", meta2:"#000000"}]
         },
         {
             name:'Vinyl Design',
@@ -75,7 +75,7 @@ export const Items: Item[] = [{
         {
             name: 'Hoodie Color',
             id: 'garment_color',
-            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#FFFFFF", meta2:"#f4f7f9"}, {name:'Red', meta1:"#ff0000", meta2:"#000000"}, {name:'Blue', meta1:"#0033d6", meta2:"#000000"}, {name:'Yellow', meta1:"#ede20f", meta2:"#000000"}, {name:'Green', meta1:"#3bed0f", meta2:"#000000"}, {name:'Purple', meta1:"#850fed", meta2:"#000000"}]
+            options: [{name:'Black', meta1: '#000000', meta2:"#FFFFFF"}, {name:'White', meta1:"#f4f7f9", meta2:"#000000000000"}, {name:'Red', meta1:"#ff0000", meta2:"#000000"}, {name:'Blue', meta1:"#0033d6", meta2:"#000000"}, {name:'Yellow', meta1:"#ede20f", meta2:"#000000"}, {name:'Green', meta1:"#3bed0f", meta2:"#000000"}, {name:'Purple', meta1:"#850fed", meta2:"#000000"}]
         },
         {
             name:'Vinyl Design',

@@ -10,10 +10,10 @@ export class ItemDetailOverlayComponent {
   @Input() item: Item;
   @Output() close = new EventEmitter<void>();
 
-  selectedItem: Item | null = null;
+  // selectedItem: Item | null = null;
 
 
-  onCloseClick(): void {
+  onClose(): void {
     this.close.emit();
   }
 }

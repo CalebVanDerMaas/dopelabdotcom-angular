@@ -1,4 +1,5 @@
-import { Component, HostListener, AfterViewInit, ViewChild, ElementRef, Input} from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Item } from '../types';
 import { forthQuarterSvg } from '../../assets/typescripts/4Q';
 import { clock } from '../../assets/typescripts/clock';
 import { bars } from '../../assets/typescripts/bars';
@@ -6,92 +7,57 @@ import { teeShirt } from '../../assets/typescripts/teeShirt';
 import { jogger } from '../../assets/typescripts/jogger';
 import { hoodie } from '../../assets/typescripts/hoodie';
 import { sweatshirt } from '../../assets/typescripts/sweatshirt';
-import { ChangeDetectorRef } from '@angular/core';
-import { AfterViewChecked } from '@angular/core';
-import { Item } from '../types';
 
-const vinylDesigns: { [key: string]: string} = {
+const vinylDesigns: { [key: string]: string } = {
   '4QS': forthQuarterSvg,
   'clock': clock,
   'bars': bars,
-}
+};
 
-const garmentMap: { [key: string]: string} = {
+const garmentMap: { [key: string]: string } = {
   'shirt': teeShirt,
   'jogger': jogger,
   'hoodie': hoodie,
   'sweatshirt': sweatshirt
-}
+};
 
 @Component({
   selector: 'app-item-detail-preview',
-  templateUrl: './item-detail-preview.component.html',
-  styleUrl: './item-detail-preview.component.css',
-  // encapsulation: ViewEncapsulation.None
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  template: `
+    <div class="relative w-full h-full">
+      <div [innerHTML]="garmentSVG | safeHtml" class="absolute top-0 left-0 w-full h-full"></div>
+      <div [innerHTML]="vinylSVG | safeHtml" class="absolute top-0 left-0 w-full h-full"></div>
+    </div>
+  `,
+  styles: []
 })
-export class ItemDetailPreviewComponent {
-  @Input() item: Item;
+export class ItemDetailPreviewComponent implements OnInit, OnChanges {
+  @Input() item!: Item;
+  
+  garmentSVG: string = '';
   vinylSVG: string = forthQuarterSvg;
-  garmentSVG: string = teeShirt;
-  public containerHeight: number;
-  public imageHeight: number;
-  public topMargin: number;
-  public totalMargin: number;
-  public bottomMargin: number;
-  public bottomPadding: number;
-  public height: number;
-  public width: number;
-  public rightMargin: number;
-  public leftMargin: number;
-  public currentFill: string = '#7B8482';
-  public currentStroke: string = '#03110E';
-  public currentVinylFill: string = '#A0F9E8';
+  currentFill: string = '#7B8482';
+  currentStroke: string = '#03110E';
+  currentVinylFill: string = '#A0F9E8';
   public backFill: string;
   
-
-  public element = document.getElementById("HTML element");
-
-  constructor(private cdr: ChangeDetectorRef) {
-    this.calculateDimensions();
+  ngOnInit() {
+    console.log('ItemDetailPreviewComponent initialized with item:', this.item);
+    this.updateGarmentType(this.item.id);
   }
 
-  private resizeObserver: ResizeObserver;
-
-  ngAfterViewInit() {
-    requestAnimationFrame(() => {
-      // Use another requestAnimationFrame to ensure the browser has had time to render
-      requestAnimationFrame(() => {
-        this.calculateDimensions();
-        this.cdr.detectChanges();
-      });
-    });
-  }
-  
-
-  ngAfterViewChecked(){
-    this.width = this.garment.nativeElement.offsetWidth;
-    this.height = this.garment.nativeElement.offsetHeight;
-    this.calculateDimensions();
-
-    if (this.garment.nativeElement.offsetParent){
-      this.width = this.garment.nativeElement.offsetWidth;
-      this.height = this.garment.nativeElement.offsetHeight;
-      this.calculateDimensions();
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ItemDetailPreviewComponent changes:', changes);
+    if (changes['item'] && !changes['item'].firstChange) {
+      this.updateGarmentType(this.item.id);
     }
   }
- 
 
-  ngOnInit(): void {
-    this.calculateDimensions();
-    console.log('ngOnInit - item:', this.item)
+  updateGarmentType(itemId: string) {
+    console.log('Updating garment type for item ID:', itemId);
+    this.garmentSVG = garmentMap[itemId] || '';
+    console.log('Updated garmentSVG:', this.garmentSVG ? 'SVG loaded' : 'SVG not found');
   }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event, element: string){
-
-  }
-
 
   updateFillColor(newColor: string){
     this.garmentSVG = this.garmentSVG.replace(`fill: ${this.currentFill}`, `fill: ${newColor}`);
@@ -120,37 +86,5 @@ export class ItemDetailPreviewComponent {
     this.backFill = this.currentVinylFill;
     this.currentVinylFill = '#A0F9E8';
     this.updateVinylColor(this.backFill);
-    this.cdr.detectChanges();
   }
-
-  updateGarmentType(itemId: string){
-    if (itemId in garmentMap){
-      this.garmentSVG = garmentMap[itemId];
-    } else {
-      console.warn('Unknown item ID:', itemId);
-    }
-    this.cdr.detectChanges();
-  }
-
-  calculateDimensions(): void {
-    if (this.item && this.item.proportion && this.item.proportion.length > 0) {
-      const proportion = this.item.proportion[0];
-      this.bottomMargin = this.height * proportion.bottomMargin * -1;
-      this.topMargin = this.height * proportion.topMargin * -1;
-      this.containerHeight = this.height;
-      this.rightMargin = this.width * proportion.rightMargin * -1;
-      this.leftMargin = this.width * proportion.leftMargin * -1;
-    } else {
-      // Fallback to default values if proportion is not available
-      this.bottomMargin = this.height * 0.20707596 * -1;
-      this.topMargin = this.height * 0.16129032 * -1;
-      this.containerHeight = this.height;
-      this.rightMargin = this.width * 0.07358739 * -1;
-      this.leftMargin = this.width * 0.06701708 * -1;
-    }
-  }
-
-  @ViewChild('garment')
-  garment: ElementRef;
 }
-
